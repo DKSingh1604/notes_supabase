@@ -53,7 +53,12 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notes'),
+        centerTitle: true,
+      ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.amber[200],
         onPressed: addNewNote,
         child: const Icon(Icons.add),
       ),
@@ -68,19 +73,27 @@ class _NotesPageState extends State<NotesPage> {
           final notes = snapshot.data!;
 
           return ListView.builder(
-              itemCount: notes.length,
-              itemBuilder: (context, index) {
-                //get inividual note
-                final note = notes[index];
+            itemCount: notes.length,
+            itemBuilder: (context, index) {
+              //get inividual note
+              final note = notes[index];
 
-                //get the column you want
-                final noteText = note['body'];
+              //get the column you want
+              final noteText = note['body'];
 
-                //return to the UI
-                return ListTile(
+              //return to the UI
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  tileColor: Colors.amber[200],
                   title: Text(noteText),
-                );
-              });
+                ),
+              );
+            },
+          );
         },
       ),
     );
